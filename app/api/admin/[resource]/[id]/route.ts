@@ -7,6 +7,7 @@ import {
   writeErrorMessage,
 } from "@/lib/admin-resources";
 import { nextAutoNumber } from "@/lib/admin-sort";
+import { revalidateSite } from "@/lib/revalidate";
 import { getServiceClient, isSupabaseWritable } from "@/lib/supabase";
 
 /* PATCH  /api/admin/<resource>/<id> — update a row
@@ -50,6 +51,7 @@ export async function PATCH(req: Request, { params }: Ctx) {
   if (error) {
     return NextResponse.json({ error: writeErrorMessage(error) }, { status: 400 });
   }
+  revalidateSite();
   return NextResponse.json({ data });
 }
 
@@ -71,5 +73,6 @@ export async function DELETE(_req: Request, { params }: Ctx) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }

@@ -6,6 +6,7 @@ import { getNewsPosts } from "@/lib/content";
 
 // Always reflect the latest posts edited in the admin panel.
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 export const metadata = pageMetadata({
   title: "お知らせ",

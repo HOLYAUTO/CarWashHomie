@@ -7,6 +7,7 @@ import { BRAND_FAQS } from "@/lib/faqs";
 
 // Always reflect the latest brand list edited in the admin panel.
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 export const metadata = pageMetadata({
   title: "Adam's Polishes 埼玉 施工代理店｜取扱いブランド",
