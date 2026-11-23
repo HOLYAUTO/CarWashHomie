@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Playfair_Display,
-  UnifrakturMaguntia,
-  Noto_Sans_JP,
-  Press_Start_2P,
-  VT323,
-  Bungee,
-  DotGothic16,
-} from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -18,60 +10,69 @@ import CollectionProvider from "@/components/collection/CollectionProvider";
 import CollectionBadge from "@/components/collection/CollectionBadge";
 import { SITE, BUSINESS } from "@/lib/constants";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
+/* Fonts are self-hosted via next/font/local (files in app/fonts, OFL
+   licenses in app/fonts/licenses). next/font/google fetched the font CSS
+   from Google at build time and derives class-name hashes from it; on
+   Vercel the server HTML and client CSS ended up with different hashes,
+   so none of the --font-* variables were defined in production. Local
+   files make the output deterministic. */
+
+const playfair = localFont({
+  src: "./fonts/PlayfairDisplay.woff2",
+  weight: "400 900",
   variable: "--font-playfair",
   display: "swap",
 });
 
-const blackletter = UnifrakturMaguntia({
-  subsets: ["latin"],
+const blackletter = localFont({
+  src: "./fonts/UnifrakturMaguntia.woff2",
   weight: "400",
   variable: "--font-blackletter",
   display: "swap",
 });
 
-/* Noto Sans JP — body / readable Japanese. `preload: false`
-   prevents Next.js from trying to preload a massive subset file;
-   `display: swap` keeps text visible while the Japanese glyphs
-   stream in. Limit to the weights actually used on the site to
-   cut CLS from late-loading Japanese characters. */
-const notoSansJp = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
+/* Noto Sans JP — body / readable Japanese. Variable font (400–900),
+   subset to Latin, kana, CJK symbols and JIS level 1/2 kanji (cp932).
+   `preload: false` because the file is ~2.3 MB; `display: swap` keeps
+   text visible while it streams in. */
+const notoSansJp = localFont({
+  src: "./fonts/NotoSansJP-Variable.woff2",
+  weight: "100 900",
   variable: "--font-noto",
   display: "swap",
   preload: false,
 });
 
 // 90s / Y2K display fonts
-const pressStart = Press_Start_2P({
-  subsets: ["latin"],
+const pressStart = localFont({
+  src: "./fonts/PressStart2P.woff2",
   weight: "400",
   variable: "--font-pixel",
   display: "swap",
 });
 
-const vt323 = VT323({
-  subsets: ["latin"],
+const vt323 = localFont({
+  src: "./fonts/VT323.woff2",
   weight: "400",
   variable: "--font-crt",
   display: "swap",
 });
 
-const bungee = Bungee({
-  subsets: ["latin"],
+const bungee = localFont({
+  src: "./fonts/Bungee.woff2",
   weight: "400",
   variable: "--font-chunky",
   display: "swap",
 });
 
-// Pixel-style Japanese (16px DotGothic) for kana/kanji 90s vibe
-const dotGothic = DotGothic16({
-  subsets: ["latin"],
+// Pixel-style Japanese (16px DotGothic) for kana/kanji 90s vibe.
+// Subset like Noto Sans JP (~440 KB), so not preloaded.
+const dotGothic = localFont({
+  src: "./fonts/DotGothic16-Regular.woff2",
   weight: "400",
   variable: "--font-pixel-jp",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
