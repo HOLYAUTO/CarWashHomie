@@ -6,6 +6,7 @@ import { getUsefulArticles } from "@/lib/content";
 
 // Always reflect the latest articles edited in the admin panel.
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 export const metadata = pageMetadata({
   title: "お役立ち情報",

@@ -7,6 +7,7 @@ import {
   writeErrorMessage,
 } from "@/lib/admin-resources";
 import { nextAutoNumber } from "@/lib/admin-sort";
+import { revalidateSite } from "@/lib/revalidate";
 import { getServiceClient, isSupabaseWritable } from "@/lib/supabase";
 
 /* GET  /api/admin/<resource>  — list ALL rows (incl. unpublished)
@@ -70,5 +71,6 @@ export async function POST(req: Request, { params }: Ctx) {
   if (error) {
     return NextResponse.json({ error: writeErrorMessage(error) }, { status: 400 });
   }
+  revalidateSite();
   return NextResponse.json({ data }, { status: 201 });
 }

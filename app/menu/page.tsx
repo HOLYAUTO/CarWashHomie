@@ -17,6 +17,7 @@ import { menuFaqs } from "@/lib/faqs";
 
 // Always reflect the latest menu edited in the admin panel.
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 export const metadata = pageMetadata({
   title: "施術メニュー",

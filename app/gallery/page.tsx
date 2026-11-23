@@ -7,6 +7,7 @@ import { getGalleryCases, getTestimonials } from "@/lib/content";
 
 // Always reflect the latest content edited in the admin panel.
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 export const metadata = pageMetadata({
   title: "症例カルテ",

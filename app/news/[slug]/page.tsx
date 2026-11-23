@@ -14,6 +14,7 @@ import {
 
 // Always reflect the latest edits made in the admin panel.
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 type Props = { params: { slug: string } };
 
