@@ -25,12 +25,29 @@ export const isSupabaseConfigured = Boolean(url && anonKey);
 /** True when server-side writes (admin panel) are possible. */
 export const isSupabaseWritable = Boolean(url && serviceKey);
 
-/** Anonymous, read-only client. `null` if not configured. */
+/** Anonymous, read-only client. `null` if not configured.
+
+    If the anon key is missing but the service-role key is set, falls
+    back to the service-role client ON THE SERVER ONLY. The production
+    site once ran without NEXT_PUBLIC_SUPABASE_ANON_KEY: the admin panel
+    (service role) saved prices to the DB while the public pages quietly
+    showed the hard-coded defaults. Every public fetcher in lib/content.ts
+    filters `published = true` itself, so bypassing RLS here exposes
+    nothing extra. The service key is not a NEXT_PUBLIC_ variable, so it
+    never reaches the browser bundle. */
 export function getPublicClient(): SupabaseClient | null {
-  if (!url || !anonKey) return null;
-  return createClient(url, anonKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
+  if (url && anonKey) {
+    return createClient(url, anonKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+  }
+  if (url && serviceKey && typeof window === "undefined") {
+    console.warn(
+      "getPublicClient: NEXT_PUBLIC_SUPABASE_ANON_KEY is not set; reading published rows with the service-role client.",
+    );
+    return getServiceClient();
+  }
+  return null;
 }
 
 /** Service-role client for server-side writes. Throws if missing. */
