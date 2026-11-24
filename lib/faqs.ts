@@ -18,7 +18,7 @@ import {
   hoursLabel,
 } from "@/lib/constants";
 import type { Brand, BodyCoating } from "@/lib/content";
-import { otherBrandsLead } from "@/lib/brand-copy";
+import { brandChoiceList, brandRosterLead } from "@/lib/brand-copy";
 
 const NAME = BUSINESS.nameJa;
 const ADDRESS = `〒${BUSINESS.postalCode} ${BUSINESS.addressLine}`;
@@ -122,7 +122,7 @@ export const RESERVATION_FAQS: FaqItem[] = [
    /brands targets. The brand roster comes from the admin panel, so the
    answers that list brands follow whatever is published there. */
 export function brandFaqs(brands: Brand[]): FaqItem[] {
-  const others = otherBrandsLead(brands);
+  const choices = brandChoiceList(brands);
   return [
     {
       question:
@@ -132,7 +132,7 @@ export function brandFaqs(brands: Brand[]): FaqItem[] {
     },
     {
       question: "取り扱っているブランドを教えてください。",
-      answer: `Adam's Polishes（アダムスポリッシュ）を中心に、${others}信頼できるカーケアブランドを厳選して取り扱っています。`,
+      answer: `Adam's Polishes（アダムスポリッシュ）を中心に、${brandRosterLead(brands)}信頼できるカーケアブランドを厳選して取り扱っています。`,
     },
     {
       question: "Adam's Polishes製品の購入だけでもお願いできますか？",
@@ -145,7 +145,9 @@ export function brandFaqs(brands: Brand[]): FaqItem[] {
     },
     {
       question: "ブランドごとの使い分けはどう決まりますか？",
-      answer: `車両の状態やご希望に応じて、Adam's Polishesの本格コーティングをはじめ、${others}取扱いブランドの中から最適な製品をご提案します。`,
+      answer: choices
+        ? `車両の状態やご希望に応じて、Adam's Polishesのケア製品から、${choices}まで最適な製品をご提案します。`
+        : "車両の状態やご希望に応じて、Adam's Polishesのケア製品をはじめ、最適な製品をご提案します。",
     },
   ];
 }

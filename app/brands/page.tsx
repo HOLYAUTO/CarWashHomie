@@ -4,7 +4,7 @@ import FaqJsonLd from "@/components/FaqJsonLd";
 import { pageMetadata } from "@/lib/constants";
 import { getBrands } from "@/lib/content";
 import { brandFaqs } from "@/lib/faqs";
-import { otherBrandNames, otherBrandsLead } from "@/lib/brand-copy";
+import { brandsMetaSentence, otherBrandNames } from "@/lib/brand-copy";
 
 // Always reflect the latest brand list edited in the admin panel.
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export async function generateMetadata() {
   const brands = await getBrands();
   return pageMetadata({
     title: "Adam's Polishes 埼玉 施工代理店｜取扱いブランド",
-    description: `車の美容外科 Car Wash Homiesは埼玉県さいたま市岩槻区の「Adam's Polishes 埼玉 施工代理店」。${otherBrandsLead(brands)}厳選ブランドの施工・販売にも対応します。`,
+    description: `車の美容外科 Car Wash Homiesは埼玉県さいたま市岩槻区の「Adam's Polishes 埼玉 施工代理店」。${brandsMetaSentence(brands)}`,
     path: "/brands",
     keywords: [
       "Adam's Polishes 埼玉",
@@ -24,6 +24,7 @@ export async function generateMetadata() {
       "アダムスポリッシュ 埼玉",
       "アダムスポリッシュ 施工代理店",
       ...otherBrandNames(brands),
+      "セラミックコーティング 埼玉",
       "取扱いブランド",
       "さいたま市",
       "岩槻",
