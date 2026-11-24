@@ -347,6 +347,9 @@ export const DEFAULT_B2B_SERVICES: B2BService[] = [
   { id: "default-6", title: "ヘッドライト研磨", subtitle: "Headlight Polish", sort_order: 6, published: true },
 ];
 
+/* Fallback only — used when Supabase is unreachable. Mirrors the
+   roster published in the admin panel; also feeds the site-wide
+   Organization JSON-LD (components/JsonLd.tsx). */
 export const DEFAULT_BRANDS: Brand[] = [
   { id: "default-1", name: "Adam's Polishes", region: "Premium Car Care, USA", label: "Official Dealer", sort_order: 1, published: true },
   { id: "default-2", name: "RESISTANCE COATING", region: null, label: "埼玉施工代理店", sort_order: 2, published: true },

@@ -3,24 +3,13 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import type { Brand } from "@/lib/content";
+import {
+  BRAND_DESCRIPTIONS,
+  DEFAULT_BRAND_DESCRIPTION,
+  brandsIntroSentence,
+} from "@/lib/brand-copy";
 import type { FaqItem } from "@/components/FaqJsonLd";
 import FaqSection from "@/components/FaqSection";
-
-/* Curated positioning copy per brand — richer than the thin
-   name/region/label fields the admin panel manages, so the page
-   reads like real editorial content for both search engines and
-   LLM answer engines. Falls back to a generic line for any brand
-   added later in the admin panel that isn't in this list yet. */
-const BRAND_DESCRIPTIONS: Record<string, string> = {
-  "Adam's Polishes":
-    "アメリカ発のプレミアムカーケアブランド。世界中のプロディテイラーに支持されるポリッシュ・コーティング・ケミカルを、埼玉県内の正規施工代理店として取り扱っています。",
-  "RESISTANCE COATING":
-    "酸性・アルカリ性の汚れや雨染みなど、塗装へのダメージに対する耐性を高めるコーティング。最高グレード「1ST CLASS RECON100」に採用しています。当店は埼玉施工代理店として施工を行っています。",
-  "3D HYBRID COATING":
-    "ナノセラミック系のハイブリッドコーティング。2層構造で高耐久・高光沢の仕上がりを実現し、「1ST CLASS RECON100」に採用しています。当店は埼玉施工代理店として施工を行っています。",
-};
-const DEFAULT_BRAND_DESCRIPTION =
-  "厳選した信頼できるカーケアブランドとして、施工・販売の両面でお取り扱いしています。";
 
 const PILLARS = [
   {
@@ -75,8 +64,7 @@ export default function Brands({
             <p className="text-midnight/70 leading-relaxed max-w-2xl mx-auto font-readable">
               車の美容外科 Car Wash Homies（埼玉県さいたま市岩槻区）は、
               Adam&apos;s Polishesの埼玉施工代理店です。
-              RESISTANCE COATING・3D HYBRID COATINGの埼玉施工代理店も務め、
-              信頼できるカーケアブランドを厳選して施工・販売の両面でお取り扱いしています。
+              {brandsIntroSentence(brands)}
             </p>
           </motion.div>
 

@@ -45,8 +45,8 @@ export default function JsonLd() {
       name: BUSINESS.operator,
       jobTitle: BUSINESS.operatorTitle,
     },
-    /* Mirrors the curated defaults in lib/content.ts (Adam's Polishes
-       埼玉施工代理店 ほか) so every page carries the brand roster as a
+    /* Mirrors DEFAULT_BRANDS in lib/content.ts (kept in step with the
+       admin-panel roster) so every page carries the brand roster as a
        search/LLM-answer-engine hint. The dedicated /brands page is the
        live, admin-editable source of truth for the full brand copy. */
     brand: DEFAULT_BRANDS.map((b) => ({
