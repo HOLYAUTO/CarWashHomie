@@ -58,7 +58,7 @@ export async function GET() {
     "",
     "## よくある質問",
     "",
-    ...allFaqs(coatings).flatMap((f) => [`### ${f.question}`, "", f.answer, ""]),
+    ...allFaqs(coatings, brands).flatMap((f) => [`### ${f.question}`, "", f.answer, ""]),
   ];
 
   if (useful.length > 0) {

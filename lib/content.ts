@@ -347,11 +347,13 @@ export const DEFAULT_B2B_SERVICES: B2BService[] = [
   { id: "default-6", title: "ヘッドライト研磨", subtitle: "Headlight Polish", sort_order: 6, published: true },
 ];
 
+/* Fallback only — used when Supabase is unreachable. Mirrors the
+   roster published in the admin panel; also feeds the site-wide
+   Organization JSON-LD (components/JsonLd.tsx). */
 export const DEFAULT_BRANDS: Brand[] = [
-  { id: "default-1", name: "Adam's Polishes", region: "Premium Car Care, USA", label: "埼玉 施工代理店", sort_order: 1, published: true },
-  { id: "default-2", name: "FunCruise", region: "Glass Coating & Car Film, 埼玉", label: "取扱いブランド", sort_order: 2, published: true },
-  { id: "default-3", name: "BULLET", region: "Detailing Supplies, 埼玉", label: "取扱いブランド", sort_order: 3, published: true },
-  { id: "default-4", name: "TACSYSTEM", region: "Touchless Coating, Japan", label: "取扱いブランド", sort_order: 4, published: true },
+  { id: "default-1", name: "Adam's Polishes", region: "Premium Car Care, USA", label: "Official Dealer", sort_order: 1, published: true },
+  { id: "default-2", name: "RESISTANCE COATING", region: null, label: "埼玉施工代理店", sort_order: 2, published: true },
+  { id: "default-3", name: "3D HYBRID COATING", region: null, label: "埼玉施工代理店", sort_order: 3, published: true },
 ];
 
 /* Fetchers below are called from `force-dynamic` Server Components so

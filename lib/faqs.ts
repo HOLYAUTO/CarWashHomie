@@ -17,7 +17,8 @@ import {
   closedDaysLabel,
   hoursLabel,
 } from "@/lib/constants";
-import type { BodyCoating } from "@/lib/content";
+import type { Brand, BodyCoating } from "@/lib/content";
+import { otherBrandsLead } from "@/lib/brand-copy";
 
 const NAME = BUSINESS.nameJa;
 const ADDRESS = `〒${BUSINESS.postalCode} ${BUSINESS.addressLine}`;
@@ -118,42 +119,44 @@ export const RESERVATION_FAQS: FaqItem[] = [
 ];
 
 /* Written around the "Adam's Polishes 埼玉 施工代理店" query that
-   /brands targets. */
-export const BRAND_FAQS: FaqItem[] = [
-  {
-    question:
-      "車の美容外科 Car Wash Homiesは「Adam's Polishes」の埼玉施工代理店ですか？",
-    answer:
-      "はい。埼玉県さいたま市岩槻区を拠点に、Adam's Polishes 埼玉 施工代理店としてAdam's Polishes製品を使用したボディコーティング・ディテーリング施工を行っております。",
-  },
-  {
-    question: "取り扱っているブランドを教えてください。",
-    answer:
-      "Adam's Polishes（アダムスポリッシュ）を中心に、FunCruise・BULLET・TACSYSTEMなど、信頼できるカーケアブランドを厳選して取り扱っています。",
-  },
-  {
-    question: "Adam's Polishes製品の購入だけでもお願いできますか？",
-    answer:
-      "施工だけでなく、Adam's Polishes製品の販売にも対応しております。お気軽にお問い合わせください。",
-  },
-  {
-    question: "埼玉県内でAdam's Polishesの正規施工を受けられる店舗はどこですか？",
-    answer: `${BUSINESS.addressLine}の${NAME}が、Adam's Polishesの埼玉施工代理店です。岩槻ICから車で約10分、駐車場完備で埼玉県内各地からご来店いただけます。`,
-  },
-  {
-    question: "ブランドごとの使い分けはどう決まりますか？",
-    answer:
-      "車両の状態やご希望に応じて、Adam's Polishesの本格コーティングから、TACSYSTEMの時短系タッチレスコーティングまで最適な製品をご提案します。",
-  },
-];
+   /brands targets. The brand roster comes from the admin panel, so the
+   answers that list brands follow whatever is published there. */
+export function brandFaqs(brands: Brand[]): FaqItem[] {
+  const others = otherBrandsLead(brands);
+  return [
+    {
+      question:
+        "車の美容外科 Car Wash Homiesは「Adam's Polishes」の埼玉施工代理店ですか？",
+      answer:
+        "はい。埼玉県さいたま市岩槻区を拠点に、Adam's Polishes 埼玉 施工代理店としてAdam's Polishes製品を使用したボディコーティング・ディテーリング施工を行っております。",
+    },
+    {
+      question: "取り扱っているブランドを教えてください。",
+      answer: `Adam's Polishes（アダムスポリッシュ）を中心に、${others}信頼できるカーケアブランドを厳選して取り扱っています。`,
+    },
+    {
+      question: "Adam's Polishes製品の購入だけでもお願いできますか？",
+      answer:
+        "施工だけでなく、Adam's Polishes製品の販売にも対応しております。お気軽にお問い合わせください。",
+    },
+    {
+      question: "埼玉県内でAdam's Polishesの正規施工を受けられる店舗はどこですか？",
+      answer: `${BUSINESS.addressLine}の${NAME}が、Adam's Polishesの埼玉施工代理店です。岩槻ICから車で約10分、駐車場完備で埼玉県内各地からご来店いただけます。`,
+    },
+    {
+      question: "ブランドごとの使い分けはどう決まりますか？",
+      answer: `車両の状態やご希望に応じて、Adam's Polishesの本格コーティングをはじめ、${others}取扱いブランドの中から最適な製品をご提案します。`,
+    },
+  ];
+}
 
 /** Every FAQ on the site (duplicates removed) — for llms.txt. */
-export function allFaqs(coatings: BodyCoating[]): FaqItem[] {
+export function allFaqs(coatings: BodyCoating[], brands: Brand[]): FaqItem[] {
   const seen = new Set<string>();
   return [
     ...TOP_FAQS,
     ...menuFaqs(coatings),
-    ...BRAND_FAQS,
+    ...brandFaqs(brands),
     ...ACCESS_FAQS,
     ...RESERVATION_FAQS,
   ].filter((f) => {

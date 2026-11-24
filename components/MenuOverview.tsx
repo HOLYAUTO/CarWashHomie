@@ -57,7 +57,7 @@ const menu = [
     num: "05",
     label: "Brands",
     title: "取扱いブランド",
-    desc: "Adam's Polishes 埼玉 施工代理店。FunCruise・BULLET・TACSYSTEMも取扱い。",
+    desc: "Adam's Polishes 埼玉 施工代理店。厳選したカーケアブランドを取扱い。",
     href: "/brands",
     icon: (
       <svg aria-hidden="true" className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

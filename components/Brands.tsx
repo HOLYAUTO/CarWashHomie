@@ -3,23 +3,16 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import type { Brand } from "@/lib/content";
+import { otherBrandsLead } from "@/lib/brand-copy";
 import type { FaqItem } from "@/components/FaqJsonLd";
 import FaqSection from "@/components/FaqSection";
 
 /* Curated positioning copy per brand — richer than the thin
-   name/region/label fields the admin panel manages, so the page
-   reads like real editorial content for both search engines and
-   LLM answer engines. Falls back to a generic line for any brand
-   added later in the admin panel that isn't in this list yet. */
+   name/region/label fields the admin panel manages. Brands added in
+   the admin panel without an entry here get the generic line below. */
 const BRAND_DESCRIPTIONS: Record<string, string> = {
   "Adam's Polishes":
     "アメリカ発のプレミアムカーケアブランド。世界中のプロディテイラーに支持されるポリッシュ・コーティング・ケミカルを、埼玉県内の正規施工代理店として取り扱っています。",
-  FunCruise:
-    "埼玉県所沢市発、ガラスコーティング・カーフィルムの専門ブランド。独自開発のコーティング材と丁寧な磨き工程に定評があります。",
-  BULLET:
-    "埼玉県三芳町を拠点とするカーディテイリング専門ブランド。プロ仕様のポリッシャー・コーティング剤を展開しています。",
-  TACSYSTEM:
-    "「時短・高撥水」がコンセプトのタッチレスコーティングブランド。手軽さと持続する艶・撥水性能を両立します。",
 };
 const DEFAULT_BRAND_DESCRIPTION =
   "厳選した信頼できるカーケアブランドとして、施工・販売の両面でお取り扱いしています。";
@@ -77,7 +70,7 @@ export default function Brands({
             <p className="text-midnight/70 leading-relaxed max-w-2xl mx-auto font-readable">
               車の美容外科 Car Wash Homies（埼玉県さいたま市岩槻区）は、
               Adam&apos;s Polishesの埼玉施工代理店です。
-              FunCruise・BULLET・TACSYSTEMなど、国内外の信頼できるカーケアブランドを厳選し、
+              {otherBrandsLead(brands)}国内外の信頼できるカーケアブランドを厳選し、
               施工・販売の両面でお取り扱いしています。
             </p>
           </motion.div>
