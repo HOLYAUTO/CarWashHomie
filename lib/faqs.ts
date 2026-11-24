@@ -129,7 +129,7 @@ export const BRAND_FAQS: FaqItem[] = [
   {
     question: "取り扱っているブランドを教えてください。",
     answer:
-      "Adam's Polishes（アダムスポリッシュ）を中心に、FunCruise・BULLET・TACSYSTEMなど、信頼できるカーケアブランドを厳選して取り扱っています。",
+      "Adam's Polishes（アダムスポリッシュ）を中心に、RESISTANCE COATING・3D HYBRID COATING（いずれも埼玉施工代理店）など、信頼できるカーケアブランドを厳選して取り扱っています。",
   },
   {
     question: "Adam's Polishes製品の購入だけでもお願いできますか？",
@@ -143,7 +143,7 @@ export const BRAND_FAQS: FaqItem[] = [
   {
     question: "ブランドごとの使い分けはどう決まりますか？",
     answer:
-      "車両の状態やご希望に応じて、Adam's Polishesの本格コーティングから、TACSYSTEMの時短系タッチレスコーティングまで最適な製品をご提案します。",
+      "車両の状態やご希望に応じて、Adam's Polishesのケア製品から、ダメージ耐性に優れたRESISTANCE COATING、高耐久・高光沢の3D HYBRID COATINGまで最適な製品をご提案します。",
   },
 ];
 
