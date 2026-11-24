@@ -63,7 +63,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   {
     path: "/brands",
     title: "取扱いブランド",
-    summary: "Adam's Polishes 埼玉 施工代理店。FunCruise・BULLET・TACSYSTEM などの取扱いブランド",
+    summary: "Adam's Polishes 埼玉 施工代理店。RESISTANCE COATING・3D HYBRID COATING 埼玉施工代理店",
     priority: 0.8,
     changeFrequency: "monthly",
     tables: ["brands"],

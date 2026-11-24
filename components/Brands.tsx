@@ -14,12 +14,10 @@ import FaqSection from "@/components/FaqSection";
 const BRAND_DESCRIPTIONS: Record<string, string> = {
   "Adam's Polishes":
     "アメリカ発のプレミアムカーケアブランド。世界中のプロディテイラーに支持されるポリッシュ・コーティング・ケミカルを、埼玉県内の正規施工代理店として取り扱っています。",
-  FunCruise:
-    "埼玉県所沢市発、ガラスコーティング・カーフィルムの専門ブランド。独自開発のコーティング材と丁寧な磨き工程に定評があります。",
-  BULLET:
-    "埼玉県三芳町を拠点とするカーディテイリング専門ブランド。プロ仕様のポリッシャー・コーティング剤を展開しています。",
-  TACSYSTEM:
-    "「時短・高撥水」がコンセプトのタッチレスコーティングブランド。手軽さと持続する艶・撥水性能を両立します。",
+  "RESISTANCE COATING":
+    "酸性・アルカリ性の汚れや雨染みなど、塗装へのダメージに対する耐性を高めるコーティング。最高グレード「1ST CLASS RECON100」に採用しています。当店は埼玉施工代理店として施工を行っています。",
+  "3D HYBRID COATING":
+    "ナノセラミック系のハイブリッドコーティング。2層構造で高耐久・高光沢の仕上がりを実現し、「1ST CLASS RECON100」に採用しています。当店は埼玉施工代理店として施工を行っています。",
 };
 const DEFAULT_BRAND_DESCRIPTION =
   "厳選した信頼できるカーケアブランドとして、施工・販売の両面でお取り扱いしています。";
@@ -77,8 +75,8 @@ export default function Brands({
             <p className="text-midnight/70 leading-relaxed max-w-2xl mx-auto font-readable">
               車の美容外科 Car Wash Homies（埼玉県さいたま市岩槻区）は、
               Adam&apos;s Polishesの埼玉施工代理店です。
-              FunCruise・BULLET・TACSYSTEMなど、国内外の信頼できるカーケアブランドを厳選し、
-              施工・販売の両面でお取り扱いしています。
+              RESISTANCE COATING・3D HYBRID COATINGの埼玉施工代理店も務め、
+              信頼できるカーケアブランドを厳選して施工・販売の両面でお取り扱いしています。
             </p>
           </motion.div>
 

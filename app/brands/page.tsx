@@ -12,16 +12,16 @@ export const fetchCache = "force-no-store";
 export const metadata = pageMetadata({
   title: "Adam's Polishes 埼玉 施工代理店｜取扱いブランド",
   description:
-    "車の美容外科 Car Wash Homiesは埼玉県さいたま市岩槻区の「Adam's Polishes 埼玉 施工代理店」。FunCruise・BULLET・TACSYSTEMなど厳選ブランドの施工・販売にも対応します。",
+    "車の美容外科 Car Wash Homiesは埼玉県さいたま市岩槻区の「Adam's Polishes 埼玉 施工代理店」。RESISTANCE COATING・3D HYBRID COATINGの埼玉施工代理店として、厳選ブランドの施工・販売にも対応します。",
   path: "/brands",
   keywords: [
     "Adam's Polishes 埼玉",
     "Adam's Polishes 施工代理店",
     "アダムスポリッシュ 埼玉",
     "アダムスポリッシュ 施工代理店",
-    "FunCruise",
-    "BULLET",
-    "TACSYSTEM",
+    "RESISTANCE COATING",
+    "3D HYBRID COATING",
+    "セラミックコーティング 埼玉",
     "取扱いブランド",
     "さいたま市",
     "岩槻",
