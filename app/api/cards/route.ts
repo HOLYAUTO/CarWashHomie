@@ -7,6 +7,11 @@ import { getCards } from "@/lib/content";
    published cards appear without a redeploy. */
 
 export const dynamic = "force-dynamic";
+// force-dynamic alone does not stop Next.js 14 from caching the Supabase
+// fetch inside a route handler (the Data Cache served the first result
+// forever, so admin-panel card edits never showed up). Opt out explicitly,
+// as the force-dynamic pages do.
+export const fetchCache = "force-no-store";
 
 export async function GET() {
   const cards = await getCards();
