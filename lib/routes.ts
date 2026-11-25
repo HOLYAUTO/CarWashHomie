@@ -58,6 +58,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
       "glass_coatings",
       "wheel_coatings",
       "b2b_services",
+      "menu_notes",
     ],
   },
   {

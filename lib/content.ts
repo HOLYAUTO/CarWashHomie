@@ -147,6 +147,19 @@ export type WheelCoating = PriceLine & {
   group_label: string | null;
 };
 
+/** Price tables on /menu that can carry footnotes. */
+export const MENU_NOTE_SECTIONS = ["body", "interior", "glass", "wheel"] as const;
+export type MenuNoteSection = (typeof MENU_NOTE_SECTIONS)[number];
+
+/** One footnote line under a /menu price table (「※ …」). */
+export type MenuNote = {
+  id: string;
+  section: MenuNoteSection;
+  body: string;
+  sort_order: number;
+  published: boolean;
+};
+
 /** 業者様向けご依頼のカード。 */
 export type B2BService = {
   id: string;
@@ -356,6 +369,20 @@ export const DEFAULT_BRANDS: Brand[] = [
   { id: "default-3", name: "3D HYBRID COATING", region: null, label: "埼玉施工代理店", sort_order: 3, published: true },
 ];
 
+/* Fallback only — used when Supabase is unreachable or the menu_notes
+   table does not exist yet. Mirrors the rows seeded by
+   supabase/migrations/20261125000000_menu_notes.sql. */
+export const DEFAULT_MENU_NOTES: MenuNote[] = [
+  { id: "default-1", section: "body", body: "※ 全てケミカル洗車・研磨あり", sort_order: 1, published: true },
+  { id: "default-2", section: "body", body: "※ 耐久年数はお客様とのご協力次第になります。環境やメンテナンス状況もご考慮ください。", sort_order: 2, published: true },
+  { id: "default-3", section: "body", body: "※ お車の大きさ・新車／中古、花粉時期や新車時の状態によって内容・金額が変動する場合がございます。", sort_order: 3, published: true },
+  { id: "default-4", section: "interior", body: "※ 汚れ・素材に応じて金額が前後する場合がございます。事前の問診にてすり合わせさせていただきます。", sort_order: 4, published: true },
+  { id: "default-5", section: "glass", body: "※ シミや汚れのない新車価格", sort_order: 5, published: true },
+  { id: "default-6", section: "glass", body: "※ 1年保証ですが使用頻度や使用状況で変化", sort_order: 6, published: true },
+  { id: "default-7", section: "glass", body: "※ 愛車検証で3年経過後も撥水性能は良好です（2026年2月現在）", sort_order: 7, published: true },
+  { id: "default-8", section: "wheel", body: "※ ボディーコーティングとセットがお得になりますので、同時施工をおすすめいたします！", sort_order: 8, published: true },
+];
+
 /* Fetchers below are called from `force-dynamic` Server Components so
    the client's edits appear right away rather than on next deploy. */
 
@@ -558,6 +585,41 @@ export async function getWheelCoatings(): Promise<WheelCoating[]> {
   return data && data.length > 0
     ? (data as WheelCoating[])
     : DEFAULT_WHEEL_COATINGS;
+}
+
+/** Note lines per price table, each in display order. */
+export function groupMenuNotes(
+  notes: MenuNote[],
+): Record<MenuNoteSection, string[]> {
+  const out = Object.fromEntries(
+    MENU_NOTE_SECTIONS.map((s) => [s, [] as string[]]),
+  ) as Record<MenuNoteSection, string[]>;
+  for (const n of notes) {
+    if (n.section in out) out[n.section].push(n.body);
+  }
+  return out;
+}
+
+/* Footnotes under the /menu price tables. Like the price tables, the
+   DB is the source of truth once reachable: unpublishing or deleting a
+   note hides it. The defaults are only for an unreachable DB / missing
+   table, so the page never loses its notes because of an outage. */
+export async function getMenuNotes(): Promise<MenuNote[]> {
+  const supabase = getPublicClient();
+  if (!supabase) return DEFAULT_MENU_NOTES;
+
+  const { data, error } = await supabase
+    .from("menu_notes")
+    .select("*")
+    .eq("published", true)
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("getMenuNotes:", error.message);
+    return DEFAULT_MENU_NOTES;
+  }
+  return (data ?? []) as MenuNote[];
 }
 
 export async function getB2BServices(): Promise<B2BService[]> {

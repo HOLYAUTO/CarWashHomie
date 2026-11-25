@@ -179,7 +179,7 @@ export default function ResourceEditor({ schema }: { schema: FormSchema }) {
               </div>
               {schema.subtitleField && row[schema.subtitleField] && (
                 <div className="text-sm text-midnight/50 truncate">
-                  {row[schema.subtitleField]}
+                  {optionLabel(schema, schema.subtitleField, row[schema.subtitleField])}
                 </div>
               )}
             </div>
@@ -355,6 +355,25 @@ function Field({
         </div>
       );
 
+    case "select":
+      return (
+        <div>
+          {label}
+          <select
+            value={(value as string) ?? ""}
+            onChange={(e) => onChange(e.target.value)}
+            className={base}
+          >
+            {(field.options ?? []).map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
+          {help}
+        </div>
+      );
+
     case "datetime":
       return (
         <div>
@@ -522,6 +541,13 @@ async function compressImage(file: File): Promise<File> {
 }
 
 /** ISO string → value for <input type="datetime-local"> (local TZ). */
+/** Shown text for a list-view value: a select field's label, else the raw value. */
+function optionLabel(schema: FormSchema, fieldName: string, value: unknown) {
+  const field = schema.fields.find((f) => f.name === fieldName);
+  const match = field?.options?.find((o) => o.value === value);
+  return match ? match.label : (value as string);
+}
+
 function toLocalInput(iso: string | undefined): string {
   if (!iso) return "";
   const d = new Date(iso);

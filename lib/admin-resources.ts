@@ -186,6 +186,15 @@ export const RESOURCES: Record<string, ResourceConfig> = {
     autoNumber: { column: "sort_order", position: "end" },
     label: "メニュー：ホイールコーティング",
   },
+  "menu-notes": {
+    table: "menu_notes",
+    fields: ["section", "body", "sort_order", "published"],
+    numericFields: ["sort_order"],
+    booleanFields: ["published"],
+    order: { column: "sort_order", ascending: true },
+    autoNumber: { column: "sort_order", position: "end" },
+    label: "メニュー：注記",
+  },
   "menu-b2b": {
     table: "b2b_services",
     fields: ["title", "subtitle", "sort_order", "published"],
