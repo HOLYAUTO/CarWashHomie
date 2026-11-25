@@ -9,7 +9,8 @@ export type FieldType =
   | "checkbox"
   | "image"
   | "color"
-  | "datetime";
+  | "datetime"
+  | "select";
 
 export type FormField = {
   name: string;
@@ -17,6 +18,8 @@ export type FormField = {
   type: FieldType;
   placeholder?: string;
   help?: string;
+  /** Choices for a "select" field (value saved to the DB, label shown). */
+  options?: readonly { value: string; label: string }[];
 };
 
 export type FormSchema = {
@@ -373,6 +376,42 @@ export const FORM_SCHEMAS: Record<string, FormSchema> = {
         type: "number",
         placeholder: "自動採番",
         help: "小さいほど先に表示されます。グループもこの順で並びます。空欄のまま保存すると自動で採番され、末尾に追加されます。",
+      },
+      { name: "published", label: "公開する", type: "checkbox" },
+    ],
+  },
+  "menu-notes": {
+    key: "menu-notes",
+    label: "メニュー：注記",
+    titleField: "body",
+    subtitleField: "section",
+    defaults: { section: "body", published: true },
+    fields: [
+      {
+        name: "section",
+        label: "表示する場所",
+        type: "select",
+        options: [
+          { value: "body", label: "ボディコーティング料金の下" },
+          { value: "interior", label: "内装コーティング・オプションの下" },
+          { value: "glass", label: "ガラスコーティングの下" },
+          { value: "wheel", label: "ホイールコーティングの下（強調枠）" },
+        ],
+        help: "選んだ料金表のすぐ下に表示されます。",
+      },
+      {
+        name: "body",
+        label: "注記の文章",
+        type: "textarea",
+        placeholder: "※ シミや汚れのない新車価格",
+        help: "1件につき1行で表示されます。先頭の「※」も含めて入力してください。",
+      },
+      {
+        name: "sort_order",
+        label: "表示順",
+        type: "number",
+        placeholder: "自動採番",
+        help: "同じ場所の中で、小さいほど先に表示されます。空欄のまま保存すると自動で採番され、末尾に追加されます。",
       },
       { name: "published", label: "公開する", type: "checkbox" },
     ],

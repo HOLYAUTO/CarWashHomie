@@ -10,10 +10,14 @@ import type {
   WheelCoating,
   B2BService,
   Brand,
+  MenuNoteSection,
 } from "@/lib/content";
 
-/* Menu data (body / interior / glass / wheel / wash) is edited in the
-   /admin panel and passed in from the server component on /menu. */
+/* Menu data (body / interior / glass / wheel / wash) and the footnotes
+   under each price table are edited in the /admin panel and passed in
+   from the server component on /menu. */
+
+type MenuNotes = Record<MenuNoteSection, string[]>;
 
 /** Group wheel rows by their group_label, preserving first-seen order. */
 function groupWheelRows(
@@ -90,7 +94,13 @@ function SectionHeader({
 /* ============================================================
    BODY COATING SECTION
    ============================================================ */
-function BodyCoatingSection({ tiers }: { tiers: BodyCoating[] }) {
+function BodyCoatingSection({
+  tiers,
+  notes,
+}: {
+  tiers: BodyCoating[];
+  notes: string[];
+}) {
   if (tiers.length === 0) return null;
 
   return (
@@ -266,17 +276,19 @@ function BodyCoatingSection({ tiers }: { tiers: BodyCoating[] }) {
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-10 text-sm text-midnight/55 leading-relaxed space-y-1.5 max-w-3xl mx-auto"
-        >
-          <p>※ 全てケミカル洗車・研磨あり</p>
-          <p>※ 耐久年数はお客様とのご協力次第になります。環境やメンテナンス状況もご考慮ください。</p>
-          <p>※ お車の大きさ・新車／中古、花粉時期や新車時の状態によって内容・金額が変動する場合がございます。</p>
-        </motion.div>
+        {notes.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mt-10 text-sm text-midnight/55 leading-relaxed space-y-1.5 max-w-3xl mx-auto"
+          >
+            {notes.map((n, i) => (
+              <p key={i}>{n}</p>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   );
@@ -288,9 +300,11 @@ function BodyCoatingSection({ tiers }: { tiers: BodyCoating[] }) {
 function InteriorCoatingSection({
   rows,
   options,
+  notes,
 }: {
   rows: InteriorCoating[];
   options: PriceLine[];
+  notes: string[];
 }) {
   return (
     <section className="relative py-24 md:py-32 bg-ivory overflow-hidden">
@@ -412,9 +426,14 @@ function InteriorCoatingSection({
               </div>
             ))}
           </div>
-          <p className="mt-6 text-xs text-midnight/50 italic leading-relaxed">
-            ※ 汚れ・素材に応じて金額が前後する場合がございます。事前の問診にてすり合わせさせていただきます。
-          </p>
+          {notes.map((n, i) => (
+            <p
+              key={i}
+              className={`${i === 0 ? "mt-6" : "mt-1"} text-xs text-midnight/50 italic leading-relaxed`}
+            >
+              {n}
+            </p>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -427,9 +446,13 @@ function InteriorCoatingSection({
 function OtherCoatingSection({
   glass,
   wheel,
+  glassNotes,
+  wheelNotes,
 }: {
   glass: PriceLine[];
   wheel: WheelCoating[];
+  glassNotes: string[];
+  wheelNotes: string[];
 }) {
   const wheelGroups = groupWheelRows(wheel);
   return (
@@ -492,13 +515,13 @@ function OtherCoatingSection({
                   </li>
                 ))}
               </ul>
-              <div className="mt-5 text-[11px] text-midnight/50 leading-relaxed space-y-1">
-                <p>※ シミや汚れのない新車価格</p>
-                <p>※ 1年保証ですが使用頻度や使用状況で変化</p>
-                <p>
-                  ※ 愛車検証で3年経過後も撥水性能は良好です（2026年2月現在）
-                </p>
-              </div>
+              {glassNotes.length > 0 && (
+                <div className="mt-5 text-[11px] text-midnight/50 leading-relaxed space-y-1">
+                  {glassNotes.map((n, i) => (
+                    <p key={i}>{n}</p>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -552,9 +575,13 @@ function OtherCoatingSection({
                   </ul>
                 </div>
               ))}
-              <div className="bg-sunset/10 border border-sunset/30 rounded-xl p-4 text-sm text-midnight/80 leading-relaxed">
-                ※ ボディーコーティングとセットがお得になりますので、同時施工をおすすめいたします！
-              </div>
+              {wheelNotes.length > 0 && (
+                <div className="bg-sunset/10 border border-sunset/30 rounded-xl p-4 text-sm text-midnight/80 leading-relaxed space-y-1">
+                  {wheelNotes.map((n, i) => (
+                    <p key={i}>{n}</p>
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         </div>
@@ -832,6 +859,7 @@ export default function Services({
   wheelCoatings,
   b2bServices,
   brands,
+  notes,
 }: {
   bodyCoatings: BodyCoating[];
   washServices: WashService[];
@@ -841,12 +869,22 @@ export default function Services({
   wheelCoatings: WheelCoating[];
   b2bServices: B2BService[];
   brands: Brand[];
+  notes: MenuNotes;
 }) {
   return (
     <>
-      <BodyCoatingSection tiers={bodyCoatings} />
-      <InteriorCoatingSection rows={interiorCoatings} options={interiorOptions} />
-      <OtherCoatingSection glass={glassCoatings} wheel={wheelCoatings} />
+      <BodyCoatingSection tiers={bodyCoatings} notes={notes.body} />
+      <InteriorCoatingSection
+        rows={interiorCoatings}
+        options={interiorOptions}
+        notes={notes.interior}
+      />
+      <OtherCoatingSection
+        glass={glassCoatings}
+        wheel={wheelCoatings}
+        glassNotes={notes.glass}
+        wheelNotes={notes.wheel}
+      />
       <WashSection services={washServices} />
       <B2BSection items={b2bServices} />
       <BrandsSection brands={brands} />

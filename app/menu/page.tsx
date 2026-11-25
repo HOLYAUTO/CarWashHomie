@@ -12,6 +12,8 @@ import {
   getWheelCoatings,
   getB2BServices,
   getBrands,
+  getMenuNotes,
+  groupMenuNotes,
 } from "@/lib/content";
 import { menuFaqs } from "@/lib/faqs";
 
@@ -46,6 +48,7 @@ export default async function MenuPage() {
     wheelCoatings,
     b2bServices,
     brands,
+    menuNotes,
   ] = await Promise.all([
     getBodyCoatings(),
     getWashServices(),
@@ -55,6 +58,7 @@ export default async function MenuPage() {
     getWheelCoatings(),
     getB2BServices(),
     getBrands(),
+    getMenuNotes(),
   ]);
 
   // Prices / durations in the answers come from the live price table.
@@ -77,6 +81,7 @@ export default async function MenuPage() {
         wheelCoatings={wheelCoatings}
         b2bServices={b2bServices}
         brands={brands}
+        notes={groupMenuNotes(menuNotes)}
       />
       <FaqJsonLd faqs={faqs} />
       <FaqSection faqs={faqs} heading="施術メニューについてのご質問" />
