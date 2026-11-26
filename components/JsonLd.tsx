@@ -1,13 +1,13 @@
-import { BUSINESS, SITE, openDays } from "@/lib/constants";
+import { BRAND, BUSINESS, SITE, openDays } from "@/lib/constants";
 import { DEFAULT_BRANDS } from "@/lib/content";
 
 /* Structured data for Google / Bing / social crawlers.
-   Emits an AutomotiveBusiness LocalBusiness schema with
+   Emits a LocalBusiness schema (subtype: SITE.businessType) with
    address, hours, contact, and legal registration number. */
 export default function JsonLd() {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "AutomotiveBusiness",
+    "@type": SITE.businessType,
     "@id": `${SITE.url}/#business`,
     name: BUSINESS.nameJa,
     alternateName: BUSINESS.nameEn,
@@ -16,8 +16,8 @@ export default function JsonLd() {
     description: SITE.description,
     url: SITE.url,
     image: `${SITE.url}${SITE.ogImage}`,
-    logo: `${SITE.url}/logo.png`,
-    telephone: `+81-${BUSINESS.phone.replace(/^0/, "").replace(/-/g, "-")}`,
+    logo: `${SITE.url}${BRAND.logo}`,
+    telephone: BUSINESS.phoneIntl,
     priceRange: "¥¥",
     taxID: BUSINESS.registrationNumber,
     address: {

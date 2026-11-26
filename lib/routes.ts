@@ -25,6 +25,9 @@ export type StaticRoute = {
   updated?: string;
   /** Tables whose rows make up the page (CMS-driven pages). */
   tables?: readonly string[];
+  /** Navigation entries. Present = listed there; the value is the link
+      label (often shorter than `title`). Order follows this array. */
+  nav?: { header?: string; footer?: string };
 };
 
 export const STATIC_ROUTES: StaticRoute[] = [
@@ -38,6 +41,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/concept",
+    nav: { header: "当院のコンセプト", footer: "当院のコンセプト" },
     title: "当院のコンセプト",
     summary: "塗装状態・使用環境・年式を診断し、車両ごとに施術計画を提案する診察方針",
     priority: 0.8,
@@ -46,6 +50,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/menu",
+    nav: { header: "施術メニュー", footer: "施術メニュー" },
     title: "施術メニュー・料金",
     summary: "ボディ・内装・ガラス・ホイールコーティングの料金一覧と施工期間の目安",
     priority: 0.9,
@@ -63,6 +68,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/brands",
+    nav: { header: "取扱いブランド", footer: "取扱いブランド" },
     title: "取扱いブランド",
     summary: "Adam's Polishes 埼玉 施工代理店。RESISTANCE COATING・3D HYBRID COATING 埼玉施工代理店",
     priority: 0.8,
@@ -71,6 +77,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/gallery",
+    nav: { header: "症例カルテ", footer: "症例カルテ" },
     title: "症例カルテ",
     summary: "Before / After で見る施工事例とお客様の声",
     priority: 0.8,
@@ -79,6 +86,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/news",
+    nav: { header: "お知らせ" },
     title: "お知らせ",
     summary: "キャンペーン・営業案内などの最新情報",
     priority: 0.6,
@@ -87,6 +95,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/useful",
+    nav: { header: "お役立ち情報", footer: "お役立ち情報" },
     title: "お役立ち情報",
     summary: "洗車・コーティング・メンテナンスのコツをまとめたコラム",
     priority: 0.6,
@@ -95,6 +104,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/doctor",
+    nav: { header: "院長紹介", footer: "院長紹介" },
     title: "院長紹介",
     summary: `院長 ${BUSINESS.operator}（${BUSINESS.operatorTitle}）のプロフィールと実績`,
     priority: 0.7,
@@ -103,6 +113,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/reservation",
+    nav: { header: "ご予約", footer: "ご予約・ご相談" },
     title: "ご予約・ご相談",
     summary: "無料カウンセリングの予約方法（公式LINE・電話・Instagram DM・フォーム）",
     priority: 0.9,
@@ -111,6 +122,7 @@ export const STATIC_ROUTES: StaticRoute[] = [
   },
   {
     path: "/access",
+    nav: { header: "アクセス", footer: "アクセス" },
     title: "アクセス",
     summary: "所在地・営業時間・定休日・駐車場・車と電車でのアクセス",
     priority: 0.7,
@@ -134,3 +146,13 @@ export const STATIC_ROUTES: StaticRoute[] = [
     updated: "2026-04-14",
   },
 ];
+
+/** Header navigation (desktop + mobile), in STATIC_ROUTES order. */
+export const HEADER_NAV = STATIC_ROUTES.flatMap((r) =>
+  r.nav?.header ? [{ label: r.nav.header, href: r.path }] : [],
+);
+
+/** Footer sitemap links, in STATIC_ROUTES order. */
+export const FOOTER_NAV = STATIC_ROUTES.flatMap((r) =>
+  r.nav?.footer ? [{ label: r.nav.footer, href: r.path }] : [],
+);
