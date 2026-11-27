@@ -4,8 +4,10 @@
 > 「車の美容外科」というコンセプト部分は持ち出さず、
 > **ページ構成・集客の仕組み・運用の仕組み** だけを汎用化して使います。
 >
-> - 技術的な SEO / MEO / LLMO の実装詳細 → [`../site-architecture-seo-meo-llmo.md`](../site-architecture-seo-meo-llmo.md)
-> - 他店向けの提案資料 → claude.ai 上の公開ページ（このファイルの末尾を参照）
+> - 技術的な SEO / MEO / LLMO の実装詳細 → [`02-seo-meo-llmo-guide.md`](02-seo-meo-llmo-guide.md)
+> - ヒアリングシート（記入用） → [`hearing-sheet.md`](hearing-sheet.md)
+> - 汎用の初期設定ファイル → [`starter/`](starter/)
+> - 他店向けの提案資料 → [`proposal/detailing-hp-proposal.html`](proposal/detailing-hp-proposal.html)
 
 ---
 
@@ -130,13 +132,16 @@
 | 1. ヒアリング | 下のヒアリングシートを埋める。施工現場を見て、写真素材を確認 | 1〜2時間 |
 | 2. キーワード設計 | 商圏の市区町村、主力メニュー、扱いブランド、得意車種から「ページごとに狙う検索」を決める | 半日 |
 | 3. 複製 | テンプレートを新しいリポジトリに複製 → オプション機能を外す → Supabase・Vercel を店舗用に作成 | 半日 |
-| 4. 設定 | §3-1 の値を差し替え、ロゴから favicon / OGP を生成 | 半日 |
+| 4. 設定 | `template/starter/lib/` の2ファイルを `lib/` に上書きコピーし、§3-1 の値を差し替え。ロゴから favicon / OGP を生成 | 半日 |
 | 5. 文章 | §3-2 を書く。FAQ を各ページ3〜6問 | 1〜2日 |
 | 6. 初期コンテンツ | メニュー料金、施工事例 6件以上、コラム 3〜5本を投入 | 1〜2日 |
 | 7. 公開 | ドメイン接続、Search Console・GA4・GBP 連携、sitemap 送信（§8 チェックリスト参照） | 半日 |
 | 8. 運用 | 月次でコラム追加・施工事例追加・検索データの確認 | 継続 |
 
 ### 5-1. ヒアリングシート（最低限）
+
+記入用は [`hearing-sheet.md`](hearing-sheet.md)。
+
 
 - 店名（正式表記・英字表記）、屋号の由来、キャッチコピー
 - 住所、最寄り IC / 駅、駐車台数（大型可否）、商圏（どの市区町村から来店が多いか）
@@ -210,5 +215,6 @@
 
 ## 提案資料
 
-他店向けの提案ページ（スマホで見せる・LINE で送る想定）は claude.ai の Artifact として公開している。
-URL はリポジトリには載せない（非公開のまま共有範囲を選べるため）。
+他店向けの提案ページの元ファイルは [`proposal/detailing-hp-proposal.html`](proposal/detailing-hp-proposal.html)。
+claude.ai の Artifact として公開済み（非公開のまま共有範囲を選べるため、URL はリポジトリに載せない）。
+文面を変えるときはこのファイルを編集して公開し直す。

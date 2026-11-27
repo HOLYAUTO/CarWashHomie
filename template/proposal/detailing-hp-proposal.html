@@ -1,0 +1,310 @@
+<title>資産になる店舗HP</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column; the "coating cross-section" diagram is the single visual moment. */
+:root{
+  --bg:#F3F5F7;        /* studio wall under LED panels */
+  --surface:#FFFFFF;
+  --ink:#16202B;       /* deep navy paint */
+  --muted:#58636F;
+  --line:#D5DBE1;
+  --tape:#F2C230;      /* masking tape */
+  --tape-ink:#2A2200;
+  --accent:#1F5F8B;    /* gloss-blue reflection */
+  --l1:#C9CFD6; --l2:#8C99A6; --l3:#3E5468; --l4:#9FC3DE;
+  --f-display:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  --f-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F151B;--surface:#16202A;--ink:#E7ECF1;--muted:#9AA6B2;--line:#2A3846;
+  --tape:#E9B923;--tape-ink:#1E1800;--accent:#7DB7E0;
+  --l1:#3A4651;--l2:#56687A;--l3:#2C4A63;--l4:#6FA4CC;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151B;--surface:#16202A;--ink:#E7ECF1;--muted:#9AA6B2;--line:#2A3846;
+  --tape:#E9B923;--tape-ink:#1E1800;--accent:#7DB7E0;
+  --l1:#3A4651;--l2:#56687A;--l3:#2C4A63;--l4:#6FA4CC;color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.85;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:760px;margin:0 auto;padding-block:48px 72px;display:flex;flex-direction:column;gap:72px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.35}
+h1{font-size:clamp(1.9rem,6vw,2.9rem);font-weight:900;letter-spacing:.01em}
+h2{font-size:clamp(1.35rem,4vw,1.75rem);font-weight:900}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+section{display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--f-display);font-weight:700;font-size:.8rem;letter-spacing:.12em;color:var(--accent)}
+.lead{color:var(--muted);font-size:1.02rem;max-width:40em}
+.tape{background:linear-gradient(transparent 58%,var(--tape) 58%,var(--tape) 92%,transparent 92%);padding:0 .1em}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-size:.88em}
+
+/* Hero */
+.hero{display:flex;flex-direction:column;gap:20px;padding-top:8px}
+.hero .sub{font-size:1.08rem;color:var(--muted);max-width:36em}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:.8rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:2px 12px;color:var(--muted)}
+
+/* Problems */
+.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.item p{color:var(--muted);font-size:.94rem;line-height:1.75}
+
+/* Compare */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.compare{grid-template-columns:1fr}}
+.col{border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.col.rent{border:1px dashed var(--line)}
+.col.own{background:var(--surface);border:2px solid var(--ink)}
+.col ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px;font-size:.94rem}
+.col .k{font-family:var(--f-display);font-weight:900;font-size:1.1rem}
+.col.rent .k{color:var(--muted)}
+
+/* Cross-section */
+.xsec{display:flex;flex-direction:column;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.layer{display:grid;grid-template-columns:132px 1fr;min-height:64px}
+@media (max-width:560px){.layer{grid-template-columns:1fr}}
+.layer .band{display:flex;flex-direction:column;justify-content:center;padding:12px 14px;font-family:var(--f-display);font-weight:700;font-size:.9rem;line-height:1.4}
+.layer .band small{font-family:var(--f-body);font-weight:500;font-size:.72rem;opacity:.85}
+.layer .body{padding:14px 18px;display:flex;flex-direction:column;gap:4px;min-width:0;border-top:1px solid var(--line)}
+.layer:first-child .body{border-top:0}
+.layer .body p{font-size:.92rem;color:var(--muted);line-height:1.7}
+.b4{background:var(--l4);color:#0E2233}
+.b3{background:var(--l3);color:#EEF4F9}
+.b2{background:var(--l2);color:#0F1822}
+.b1{background:var(--l1);color:#18212B}
+.gloss{background:linear-gradient(100deg,var(--l4) 0%,#E8F3FB 38%,var(--l4) 52%)}
+@media (prefers-reduced-motion:no-preference){
+  .gloss{background-size:220% 100%;animation:sheen 6s ease-in-out infinite}
+  @keyframes sheen{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+}
+
+/* Table */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.9rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-display);font-weight:700;font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+td.u{font-family:var(--f-mono);font-size:.82rem;white-space:nowrap;color:var(--accent)}
+
+/* Field-knowledge examples */
+.qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.q .from{font-size:.75rem;color:var(--muted);letter-spacing:.06em}
+.q .to{font-family:var(--f-display);font-weight:700;font-size:.98rem;line-height:1.5}
+.q .kw{font-family:var(--f-mono);font-size:.78rem;color:var(--accent)}
+
+/* Steps */
+ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-left:2px solid var(--line);margin-left:10px}
+ol.steps li{position:relative;padding:0 0 18px 24px;display:flex;flex-direction:column;gap:2px}
+ol.steps li:last-child{padding-bottom:0}
+ol.steps li::before{content:counter(s);counter-increment:s;position:absolute;left:-12px;top:2px;width:22px;height:22px;border-radius:50%;
+  background:var(--ink);color:var(--bg);font-family:var(--f-mono);font-size:.72rem;display:flex;align-items:center;justify-content:center}
+ol.steps{counter-reset:s}
+ol.steps .t{font-family:var(--f-display);font-weight:700}
+ol.steps .d{font-size:.92rem;color:var(--muted)}
+ol.steps .dur{font-family:var(--f-mono);font-size:.78rem;color:var(--accent)}
+
+/* Plans */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.plan.main{border:2px solid var(--ink)}
+.plan ul{margin:0;padding-left:1.1em;font-size:.9rem;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.plan .who{font-size:.82rem;color:var(--accent)}
+
+/* Proof */
+.proof{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:6px 18px;margin:0;padding:0;list-style:none;font-size:.92rem}
+.checks li{display:flex;gap:8px}
+.checks li::before{content:"";flex:none;width:10px;height:10px;margin-top:.6em;border-radius:2px;background:var(--tape)}
+
+/* CTA */
+.cta{background:var(--ink);color:var(--bg);border-radius:14px;padding:28px 22px;display:flex;flex-direction:column;gap:14px}
+.cta h2{color:var(--bg)}
+.cta p{opacity:.85}
+.cta .tape{background:var(--tape);color:var(--tape-ink);padding:0 .3em;border-radius:3px}
+footer{font-size:.8rem;color:var(--muted)}
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">カーコーティング・ディテイリング店のための集客HP</div>
+    <h1>広告を止めても、<br><span class="tape">検索から予約が来る</span>HPを。</h1>
+    <p class="sub">施工の現場を知っている人間が、ページ構成から記事・施工事例の書き方まで組み立てます。月ごとに積み上がる記事と事例が、お店の資産として残ります。</p>
+    <div class="tags">
+      <span class="tag">ボディコーティング</span><span class="tag">ガラス・セラミック</span><span class="tag">磨き・ディテイリング</span><span class="tag">PPF・ホイール・内装</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">いま、こうなっていませんか</div>
+    <h2>腕はあるのに、ネットで見つけてもらえない</h2>
+    <div class="list">
+      <div class="item"><h3>集客がポータルと広告頼み</h3><p>掲載料や広告費を止めると問い合わせも止まる。手数料の分だけ利益が削られる。</p></div>
+      <div class="item"><h3>SNSは流れていく</h3><p>Instagram の投稿は数日で埋もれる。「地域名＋コーティング」で検索した人には届きにくい。</p></div>
+      <div class="item"><h3>HPが名刺代わりで止まっている</h3><p>料金も施工事例も数年前のまま。店主が自分で更新できない作りになっている。</p></div>
+      <div class="item"><h3>制作会社に施工の話が通じない</h3><p>「硬化型と撥水型の違い」「下地処理の工程」が伝わらず、どこの店でも言える文章になる。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">考え方</div>
+    <h2>広告は借りもの、記事と施工事例は持ちもの</h2>
+    <div class="compare">
+      <div class="col rent">
+        <div class="k">借りる集客</div>
+        <ul>
+          <li>リスティング広告・ポータル掲載</li>
+          <li>お金を払っている間だけ表示される</li>
+          <li>止めたら流入はゼロに戻る</li>
+        </ul>
+      </div>
+      <div class="col own">
+        <div class="k">持つ集客（オーガニック）</div>
+        <ul>
+          <li>コラム・施工事例・料金ページ</li>
+          <li>1記事1URLで検索結果に残り続ける</li>
+          <li>書いた分だけ入口が増えていく</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead">広告をやめる必要はありません。広告に払う分の一部を、毎月残る記事と事例に回していく提案です。</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">HPの構造</div>
+    <h2>HPも施工と同じで、下地から積み上げる</h2>
+    <p class="lead">見た目（トップコート）だけ整えても、下地ができていなければ検索には出てきません。このHPは次の3層でできています。</p>
+    <div class="xsec" role="list" aria-label="HPの層構造">
+      <div class="layer" role="listitem">
+        <div class="band b4 gloss">トップコート<small>毎月積み増す</small></div>
+        <div class="body"><h3>コラム・施工事例・お知らせ</h3><p>「洗車キズ 消す」「黒い車 コーティング」など、お客さんが実際に調べる言葉を1記事1ページで。店主が管理画面から追加できます。</p></div>
+      </div>
+      <div class="layer" role="listitem">
+        <div class="band b3">ベースコート<small>お店ごとに設計</small></div>
+        <div class="body"><h3>ページ構成と導線</h3><p>メニュー・料金、施工事例、代表紹介、アクセス、予約。どのページでどの検索を受けるかを決め、どのページからも予約へ進めるようにします。</p></div>
+      </div>
+      <div class="layer" role="listitem">
+        <div class="band b2">下地処理<small>最初から組み込み済み</small></div>
+        <div class="body"><h3>検索エンジン・地図・AI向けの技術</h3><p>店舗情報の構造化データ、FAQ、パンくず、サイトマップ自動更新、Googleマップ連携、ChatGPT などのAI検索向け案内ファイル（llms.txt）。</p></div>
+      </div>
+      <div class="layer" role="listitem">
+        <div class="band b1">素地<small>お店の実力</small></div>
+        <div class="body"><h3>施工の腕・写真・お客さんの声</h3><p>ここだけはお店にしか出せません。ヒアリングで引き出し、ページに落とし込みます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">ページ構成</div>
+    <h2>どのページで、どんな検索を受けるか</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>URL</th><th>ページ</th><th>受け止める検索の例</th></tr></thead>
+        <tbody>
+          <tr><td class="u">/</td><td>トップ</td><td>「◯◯市 カーコーティング」「店名」</td></tr>
+          <tr><td class="u">/menu</td><td>メニュー・料金</td><td>「ガラスコーティング 料金 ◯◯」「セラミックコーティング 値段」</td></tr>
+          <tr><td class="u">/gallery</td><td>施工事例</td><td>「アルファード コーティング」「黒 車 磨き」</td></tr>
+          <tr><td class="u">/useful/…</td><td>コラム（1記事1ページ）</td><td>「ウォータースポット 取り方」「コーティング 必要か」</td></tr>
+          <tr><td class="u">/brands</td><td>取扱いブランド</td><td>「（ブランド名） 施工店 ◯◯県」</td></tr>
+          <tr><td class="u">/concept</td><td>こだわり・選ばれる理由</td><td>比較検討中の指名検索</td></tr>
+          <tr><td class="u">/doctor</td><td>代表・スタッフ紹介</td><td>「誰が施工するのか」への答え</td></tr>
+          <tr><td class="u">/access</td><td>アクセス</td><td>「店名 場所」・Googleマップ</td></tr>
+          <tr><td class="u">/reservation</td><td>予約・見積もり相談</td><td>電話・LINE・Instagram・フォームをまとめた予約窓口</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">現場を知っていることの強み</div>
+    <h2>店頭でよく聞かれる質問が、そのまま集客ページになる</h2>
+    <p class="lead">一般的な制作会社は検索ツールからキーワードを拾います。こちらは、施工の現場で実際に聞かれる質問から始めます。答えに自店の写真・工程・料金が入るので、ネット上の一般論と差がつきます。</p>
+    <div class="qa">
+      <div class="q"><div class="from">店頭での質問</div><div class="to">「新車なのに磨きって必要なんですか？」</div><div class="kw">→ 新車 コーティング 下地処理</div></div>
+      <div class="q"><div class="from">店頭での質問</div><div class="to">「ディーラーのコーティングと何が違うの？」</div><div class="kw">→ ディーラー コーティング 違い</div></div>
+      <div class="q"><div class="from">店頭での質問</div><div class="to">「施工後、いつから洗車していい？」</div><div class="kw">→ コーティング後 洗車 いつから</div></div>
+      <div class="q"><div class="from">店頭での質問</div><div class="to">「白い車でもやる意味ある？」</div><div class="kw">→ 白い車 コーティング 必要</div></div>
+    </div>
+    <p class="lead">施工事例も同じです。タイトルに <strong>車種・色・メニュー</strong> を入れ、なぜその工程を選んだかを2〜3行添えるだけで、車種名の検索から見つけてもらえるページになります。</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">運用</div>
+    <h2>更新は、店主がスマホで</h2>
+    <p class="lead">専用の管理画面から、コードを触らずに更新できます。料金を変えると、よくある質問の答えやAI向けの案内ファイルにも自動で反映されます。</p>
+    <ul class="checks">
+      <li>メニュー・料金（ボディ／ガラス／ホイール／内装）</li>
+      <li>施工事例（Before / After 写真）</li>
+      <li>コラム（1記事1ページで自動公開）</li>
+      <li>お知らせ・キャンペーン</li>
+      <li>お客様の声</li>
+      <li>取扱いブランド</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="eyebrow">実例</div>
+    <h2>自社のコーティング店で動いている仕組みです</h2>
+    <div class="proof">
+      <p>埼玉県さいたま市のボディコーティング専門店で、実際に運用しているHPを元にしています。机上の設計ではなく、実際に予約・問い合わせの窓口として動いている仕組みをそのまま使います。</p>
+      <p><a href="https://carwashhomies.com" target="_blank" rel="noopener">carwashhomies.com</a> <span class="mono" style="color:var(--muted)">（デザインと世界観はお店ごとに作り直します）</span></p>
+      <ul class="checks">
+        <li>店舗情報・営業時間の構造化データ</li>
+        <li>ページ別のよくある質問</li>
+        <li>全ページのパンくず</li>
+        <li>記事の個別ページと記事用データ</li>
+        <li>更新日つきサイトマップの自動生成</li>
+        <li>AI検索向けの案内ファイル（llms.txt）</li>
+        <li>Googleアナリティクス・Search Console 連携</li>
+        <li>店主用の管理画面</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">進め方</div>
+    <h2>公開まで、おおよそ2〜3週間</h2>
+    <ol class="steps">
+      <li><span class="t">ヒアリング・現場確認</span><span class="d">お店の強み、よく聞かれる質問、商圏、使える写真を確認します。</span><span class="dur">1〜2時間</span></li>
+      <li><span class="t">キーワードとページ設計</span><span class="d">商圏の地域名、主力メニュー、扱いブランド、得意車種から、ページごとに受ける検索を決めます。</span><span class="dur">数日</span></li>
+      <li><span class="t">制作</span><span class="d">デザイン・文章・よくある質問を作り、料金・施工事例・最初のコラムを入れます。</span><span class="dur">1〜2週間</span></li>
+      <li><span class="t">公開・各種連携</span><span class="d">ドメイン接続、Googleビジネスプロフィール・Search Console の設定、管理画面の使い方レクチャー。</span><span class="dur">数日</span></li>
+      <li><span class="t">運用</span><span class="d">毎月コラムと施工事例を積み増し、検索データを見て次に書くテーマを決めます。</span><span class="dur">継続</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="eyebrow">プラン</div>
+    <h2>作って終わりにも、一緒に育てるにも対応</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>制作のみ</h3><div class="who">自分で更新できる方に</div>
+        <ul><li>HP一式の制作</li><li>初期コンテンツ投入</li><li>管理画面レクチャー</li></ul>
+      </div>
+      <div class="plan main">
+        <h3>制作＋運用</h3><div class="who">記事を資産として積み上げたい方に</div>
+        <ul><li>HP一式の制作</li><li>毎月のコラム制作</li><li>施工事例の掲載代行</li><li>月次の検索データ報告</li></ul>
+      </div>
+      <div class="plan">
+        <h3>リニューアル</h3><div class="who">今のHPを活かしたい方に</div>
+        <ul><li>現状HPと検索状況の確認</li><li>構成の組み直し</li><li>既存ページの引っ越し</li></ul>
+      </div>
+    </div>
+    <p class="lead">料金はお店の規模とご用意いただける素材で変わるため、ヒアリング後にお見積りします。</p>
+  </section>
+
+  <section class="cta">
+    <h2>まずは、今のHPと検索状況を見せてください</h2>
+    <p>「地域名＋コーティング」で今どこに出ているか、どのページが足りないかを確認して、<span class="tape">お店に合った構成案</span>をお持ちします。</p>
+    <p>ご相談は、この資料をお送りした担当者までご連絡ください。</p>
+  </section>
+
+  <footer>カーコーティング・ディテイリング店向け 集客HPのご提案</footer>
+</div>

@@ -77,7 +77,7 @@ export const hoursLabel = `${BUSINESS.opens} — ${BUSINESS.closes}`;
 /* Brand-concept layer — the wording that carries THIS shop's concept
    (here: "車の美容外科"). When the site is reused for another shop,
    rewrite this block instead of hunting through the chrome components.
-   See docs/template/README.md. */
+   See template/01-design.md. */
 export const BRAND = {
   /** Short wordmark shown next to the logo (header / footer). */
   mark: "車の美容外科",
