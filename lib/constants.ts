@@ -23,6 +23,7 @@ export const BUSINESS = {
   /* Contact */
   phone: "048-606-4977",
   phoneTel: "0486064977", // for tel: links
+  phoneIntl: "+81-48-606-4977", // for JSON-LD `telephone`
   email: "japanesedetailergirl@gmail.com",
   instagramHandle: "japanese_detailer_girl",
   instagramUrl: "https://www.instagram.com/japanese_detailer_girl/",
@@ -36,6 +37,9 @@ export const BUSINESS = {
   addressRegion: "埼玉県",
   addressLocality: "さいたま市岩槻区",
   streetAddress: "末田2421-2",
+  /* One-line directions (IC / station / parking) — reused by llms.txt. */
+  accessSummary:
+    "東北自動車道「岩槻IC」から車で約10分／東武アーバンパークライン「岩槻駅」から車で約10分／店舗前に駐車スペースあり（大型車可）",
 
   /* Hours — the ONLY place to edit opening hours / closed days.
      The on-page labels, JSON-LD dayOfWeek, FAQ answers and llms.txt
@@ -70,9 +74,49 @@ export function closedDaysLabel(): string {
 /** 「10:00 — 19:00」 */
 export const hoursLabel = `${BUSINESS.opens} — ${BUSINESS.closes}`;
 
+/* Brand-concept layer — the wording that carries THIS shop's concept
+   (here: "車の美容外科"). When the site is reused for another shop,
+   rewrite this block instead of hunting through the chrome components.
+   See template/01-design.md. */
+export const BRAND = {
+  /** Short wordmark shown next to the logo (header / footer). */
+  mark: "車の美容外科",
+  /** Footer pitch, one sentence per item. */
+  pitch: [
+    "ただのコーティング屋さんじゃない、車の美容外科です。",
+    "塗装状態・使用環境・年式を診断し、車両ごとに最適な施術計画をご提案。",
+    "車の寿命を延ばし、価値を守ります。",
+  ],
+  /** Header CTA button (desktop). */
+  ctaPrimary: "無料カウンセリング",
+  /** CTA button at the bottom of the mobile menu. */
+  ctaSecondary: "ご予約・ご相談",
+  /** Logo file in /public. */
+  logo: "/logo.png",
+} as const;
+
 export const SITE = {
   url: "https://carwashhomies.com",
   name: BUSINESS.nameJa,
+  /* schema.org LocalBusiness subtype for components/JsonLd.tsx
+     (e.g. AutomotiveBusiness / AutoWash / AutoRepair). */
+  businessType: "AutomotiveBusiness",
+  /** 業種 — one line, facts only (llms.txt). */
+  businessCategory: "ボディコーティング・カーディテーリング専門店",
+  /** Top-page title: 「地域＋業種 | 店名」. */
+  defaultTitle:
+    "さいたま市のボディコーティング専門店 | 車の美容外科 Car Wash Homies",
+  /** Site-wide <meta name="keywords">. */
+  keywords: [
+    "車の美容外科",
+    "カーウォッシュホーミーズ",
+    "コーティング",
+    "洗車",
+    "ディテーリング",
+    "さいたま市",
+    "岩槻",
+    "ガラスコーティング",
+  ],
   description:
     "埼玉県さいたま市でボディコーティングをお考えなら「車の美容外科 Car Wash Homies」へ。ただのコーティング屋さんではなく、お車の塗装状態や使用環境を診断し、1台1台に最適な施術をご提案。愛車の寿命を延ばし価値を守るプロの技術をご体感ください。",
   ogImage: "/og-image.png",

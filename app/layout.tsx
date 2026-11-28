@@ -78,20 +78,11 @@ const dotGothic = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "さいたま市のボディコーティング専門店 | 車の美容外科 Car Wash Homies",
-    template: "%s | 車の美容外科 Car Wash Homies",
+    default: SITE.defaultTitle,
+    template: `%s | ${BUSINESS.nameJa}`,
   },
   description: SITE.description,
-  keywords: [
-    "車の美容外科",
-    "カーウォッシュホーミーズ",
-    "コーティング",
-    "洗車",
-    "ディテーリング",
-    "さいたま市",
-    "岩槻",
-    "ガラスコーティング",
-  ],
+  keywords: [...SITE.keywords],
   authors: [{ name: BUSINESS.operator }],
   creator: BUSINESS.nameJa,
   publisher: BUSINESS.nameJa,
@@ -103,7 +94,7 @@ export const metadata: Metadata = {
     locale: SITE.locale,
     url: SITE.url,
     siteName: BUSINESS.nameJa,
-    title: "さいたま市のボディコーティング専門店 | 車の美容外科 Car Wash Homies",
+    title: SITE.defaultTitle,
     description: SITE.description,
     images: [
       {
@@ -116,7 +107,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "さいたま市のボディコーティング専門店 | 車の美容外科 Car Wash Homies",
+    title: SITE.defaultTitle,
     description: SITE.description,
     images: [SITE.ogImage],
     creator: `@${BUSINESS.xHandle}`,

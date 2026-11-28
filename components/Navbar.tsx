@@ -4,18 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BRAND, BUSINESS } from "@/lib/constants";
+import { HEADER_NAV } from "@/lib/routes";
 
-const nav = [
-  { label: "当院のコンセプト", href: "/concept" },
-  { label: "施術メニュー", href: "/menu" },
-  { label: "取扱いブランド", href: "/brands" },
-  { label: "症例カルテ", href: "/gallery" },
-  { label: "お知らせ", href: "/news" },
-  { label: "お役立ち情報", href: "/useful" },
-  { label: "院長紹介", href: "/doctor" },
-  { label: "ご予約", href: "/reservation" },
-  { label: "アクセス", href: "/access" },
-];
+const nav = HEADER_NAV;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,15 +40,15 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <Image
-            src="/logo.png"
-            alt="Car Wash Homies"
+            src={BRAND.logo}
+            alt={BUSINESS.nameEn}
             width={48}
             height={48}
             className="w-12 h-12 object-contain rounded-md opacity-90 group-hover:opacity-100 transition-opacity"
           />
           <div className="flex flex-col leading-none">
             <span className="font-pixel-jp text-[11px] text-chrome/80 tracking-[0.1em] mt-0.5">
-              車の美容外科
+              {BRAND.mark}
             </span>
           </div>
         </Link>
@@ -89,7 +81,7 @@ export default function Navbar() {
           className="btn-90s hidden lg:inline-flex !text-xs !py-2 !px-4"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-midnight animate-pulse" />
-          無料カウンセリング
+          {BRAND.ctaPrimary}
         </Link>
 
         {/* Mobile menu button */}
@@ -142,7 +134,7 @@ export default function Navbar() {
             className="mt-2 text-center py-3 rounded-full bg-sunset-gradient text-midnight font-bold"
             onClick={() => setOpen(false)}
           >
-            ご予約・ご相談
+            {BRAND.ctaSecondary}
           </Link>
         </nav>
       )}

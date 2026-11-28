@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BUSINESS, closedDaysLabel, hoursLabel } from "@/lib/constants";
+import { BRAND, BUSINESS, closedDaysLabel, hoursLabel } from "@/lib/constants";
+import { FOOTER_NAV } from "@/lib/routes";
 
 export default function Footer() {
   return (
@@ -23,25 +24,23 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-4 mb-6">
               <Image
-                src="/logo.png"
-                alt="Car Wash Homies"
+                src={BRAND.logo}
+                alt={BUSINESS.nameEn}
                 width={64}
                 height={64}
                 className="w-16 h-16 object-contain rounded-lg opacity-90"
               />
               <div className="flex flex-col leading-none">
                 <span className="font-pixel-jp text-[12px] text-cream tracking-wider mt-1">
-                  車の美容外科
+                  {BRAND.mark}
                 </span>
               </div>
             </div>
             <p className="text-chrome/60 text-sm leading-relaxed mb-6 max-w-md">
-              ただのコーティング屋さんじゃない、車の美容外科です。
-              塗装状態・使用環境・年式を診断し、車両ごとに最適な施術計画をご提案。
-              車の寿命を延ばし、価値を守ります。
+              {BRAND.pitch.join(" ")}
             </p>
             <div className="font-display text-lg candy-90s-text retro-italic">
-              「車の寿命を延ばし、価値を守る」
+              「{BUSINESS.tagline}」
             </div>
           </div>
 
@@ -51,16 +50,7 @@ export default function Footer() {
               ★ Menu ★
             </div>
             <ul className="space-y-3 text-sm">
-              {[
-                { label: "当院のコンセプト", href: "/concept" },
-                { label: "施術メニュー", href: "/menu" },
-                { label: "取扱いブランド", href: "/brands" },
-                { label: "症例カルテ", href: "/gallery" },
-                { label: "お役立ち情報", href: "/useful" },
-                { label: "院長紹介", href: "/doctor" },
-                { label: "ご予約・ご相談", href: "/reservation" },
-                { label: "アクセス", href: "/access" },
-              ].map((l) => (
+              {FOOTER_NAV.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
