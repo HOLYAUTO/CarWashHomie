@@ -3,6 +3,12 @@
 Car Wash Homies のサイトを、他のカーコーティング・ディテイリング店のHP制作に転用するための資料と初期ファイルをまとめたフォルダ。
 **このフォルダの中身は Car Wash Homies のサイト表示には一切使われない**（読み物と、新店舗にコピーする雛形だけ）。
 
+> **新しい店舗のHPは、テンプレ専用リポジトリ [HOLYAUTO/detailing-hp-template](https://github.com/HOLYAUTO/detailing-hp-template) から作る。**
+> そちらは店舗固有の内容と美容外科コンセプトを外し、中立なデザインに作り直した版で、
+> 新規店舗用の DB 定義（`supabase/schema.sql`）・README の立ち上げ手順・下の資料一式（`docs/`）も入っている。
+> 資料を直すときもテンプレ専用リポジトリ側を正とする。このフォルダは、テンプレをこのサイトから
+> 切り出したときの記録として残している。
+
 ## 中身
 
 | ファイル | 内容 | 使う場面 |
@@ -17,11 +23,9 @@ Car Wash Homies のサイトを、他のカーコーティング・ディテイ�
 ## 新しい店舗を立ち上げる流れ
 
 1. `hearing-sheet.md` を埋める
-2. このリポジトリを新しいリポジトリに複製する
-3. `template/starter/lib/` の2ファイルを `lib/` に上書きコピーし、「◯◯」をヒアリング結果で埋める
-4. `01-design.md` §3 に沿って文章・配色・ロゴを差し替え、不要な機能（カードコレクション等）を外す
-5. `02-seo-meo-llmo-guide.md` §8 のチェックリストで公開
-6. 新しいリポジトリからは `template/` フォルダを消してよい
+2. [HOLYAUTO/detailing-hp-template](https://github.com/HOLYAUTO/detailing-hp-template) を店舗用の新しいリポジトリに複製する
+3. 以降はテンプレ専用リポジトリの README「新しい店舗を作る手順」に沿って進める
+   （店舗情報・配色・ロゴ・文章の差し替え → Supabase に `schema.sql` → 公開前チェックリスト）
 
 ## 本体側のどこが「設定」か
 
